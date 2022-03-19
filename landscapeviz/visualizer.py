@@ -42,7 +42,7 @@ def plot_contour(
     plt.show()
 
 
-def plot_grid(key, filename=FILENAME, save=False, dpi=150):
+def plot_grid(key, filename=FILENAME, save=False, dpi=150, figsize=(8, 8)):
 
     X, Y, Z = _fetch_data(key, filename)
     fig, _ = plt.subplots(dpi=dpi)
@@ -65,16 +65,16 @@ def plot_3d(key, filename=FILENAME, log=False, save=False, dpi=150):
     if log:
         Z = np.log(Z + 0.1)
 
-    fig = plt.figure(dpi=dpi)
+    fig = plt.figure(figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, projection="3d")
     # make the panes transparent
     ax.xaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
     ax.yaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
     ax.zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
     # make the grid lines transparent
-    ax.xaxis._axinfo["grid"]['color'] =  (1,1,1,0)
-    ax.yaxis._axinfo["grid"]['color'] =  (1,1,1,0)
-    ax.zaxis._axinfo["grid"]['color'] =  (1,1,1,0)
+#     ax.xaxis._axinfo["grid"]['color'] =  (1,1,1,0)
+#     ax.yaxis._axinfo["grid"]['color'] =  (1,1,1,0)
+#     ax.zaxis._axinfo["grid"]['color'] =  (1,1,1,0)
 
     # Plot the surface.
     surf = ax.plot_surface(
@@ -82,12 +82,6 @@ def plot_3d(key, filename=FILENAME, log=False, save=False, dpi=150):
     )
     fig.colorbar(surf, shrink=0.5, aspect=5)
     
-    # set tick sizes
-    start, end = ax.get_xlim()
-    ax.xaxis.set_ticks(np.arange(start, end, 1))
-    
-    start, end = ax.get_ylim()
-    ax.yaxis.set_ticks(np.arange(start, end, 2))
 
     if save:
         fig.savefig("./surface.svg")
