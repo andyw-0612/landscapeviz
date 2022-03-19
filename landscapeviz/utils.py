@@ -126,7 +126,7 @@ def build_mesh(
     with h5py.File("./files/{}.hdf5".format(filename), "w") as f:
 
         f["space"] = space
-        original_results = _obj_fn(model, data, origin)
+        original_results = _obj_fn(model, data, origin, eval_batch_size)
 
         for i, metric in enumerate(z_keys):
             f["original_" + metric] = original_results[i]
