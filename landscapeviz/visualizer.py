@@ -22,12 +22,12 @@ def _fetch_data(key, filename):
 
 
 def plot_contour(
-    key, vmin=0.1, vmax=10, vlevel=0.5, trajectory=None, filename=FILENAME, save=False
+    key, vmin=0.1, vmax=10, vlevel=0.5, trajectory=None, filename=FILENAME, save=False, dpi=150
 ):
 
     X, Y, Z = _fetch_data(key, filename)
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(dpi=dpi)
     CS = ax.contour(X, Y, Z, cmap="summer", levels=np.arange(vmin, vmax, vlevel))
     ax.clabel(CS, inline=1, fontsize=8)
 
@@ -42,10 +42,10 @@ def plot_contour(
     plt.show()
 
 
-def plot_grid(key, filename=FILENAME, save=False):
+def plot_grid(key, filename=FILENAME, save=False, dpi=dpi):
 
     X, Y, Z = _fetch_data(key, filename)
-    fig, _ = plt.subplots()
+    fig, _ = plt.subplots(dpi=dpi)
 
     cmap = plt.cm.coolwarm
     cmap.set_bad(color="black")
@@ -58,14 +58,14 @@ def plot_grid(key, filename=FILENAME, save=False):
     plt.show()
 
 
-def plot_3d(key, filename=FILENAME, log=False, save=False):
+def plot_3d(key, filename=FILENAME, log=False, save=False, dpi=150):
 
     X, Y, Z = _fetch_data(key, filename)
 
     if log:
         Z = np.log(Z + 0.1)
 
-    fig = plt.figure()
+    fig = plt.figure(dpi=dpi)
     ax = fig.add_subplot(111, projection="3d")
 
     # Plot the surface.
