@@ -71,11 +71,11 @@ def get_vectors(model, seed=None, trajectory=None):
         return weights, vector_x, vector_y
 
 
-def _obj_fn(model, data, solution):
+def _obj_fn(model, data, solution, eval_batch_size):
 
     old_weights = model.get_weights()
     model.set_weights(solution)
-    value = model.evaluate(data[0], data[1], verbose=1)
+    value = model.evaluate(data[0], data[1], verbose=0, batch_size=eval_batch_size)
     model.set_weights(old_weights)
 
     return value
@@ -90,6 +90,7 @@ def build_mesh(
     verbose=True,
     seed=None,
     trajectory=None,
+    eval_batch_size=64
 ):
 
     logging.basicConfig(level=logging.INFO)
@@ -117,7 +118,7 @@ def build_mesh(
                 for x in range(len(origin))
             ]
 
-            Z.append(_obj_fn(model, data, solution))
+            Z.append(_obj_fn(model, data, solution, eval_batch_size))
 
     Z = np.array(Z)
     os.makedirs("./files", exist_ok=True)
