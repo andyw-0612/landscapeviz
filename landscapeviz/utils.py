@@ -75,7 +75,7 @@ def _obj_fn(model, data, solution):
 
     old_weights = model.get_weights()
     model.set_weights(solution)
-    value = model.evaluate(data[0], data[1], verbose=0)
+    value = model.evaluate(data[0], data[1], verbose=1)
     model.set_weights(old_weights)
 
     return value
@@ -109,6 +109,9 @@ def build_mesh(
             print("line {} out of {}".format(i, grid_length))
 
         for j in range(grid_length):
+            if j % 5 == 0:
+                print(f"column {j} out of {grid_length}")
+                
             solution = [
                 origin[x] + X[i][j] * vector_x[x] + Y[i][j] * vector_y[x]
                 for x in range(len(origin))
