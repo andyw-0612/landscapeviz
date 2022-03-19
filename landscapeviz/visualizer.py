@@ -42,7 +42,7 @@ def plot_contour(
     plt.show()
 
 
-def plot_grid(key, filename=FILENAME, save=False, dpi=dpi):
+def plot_grid(key, filename=FILENAME, save=False, dpi=150):
 
     X, Y, Z = _fetch_data(key, filename)
     fig, _ = plt.subplots(dpi=dpi)
