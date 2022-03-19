@@ -109,8 +109,8 @@ def build_mesh(
             print("line {} out of {}".format(i, grid_length))
 
         for j in range(grid_length):
-            if j % 5 == 0:
-                print(f"column {j} out of {grid_length}")
+            if j % 10 == 0:
+                print(f"\t column {j} out of {grid_length}")
                 
             solution = [
                 origin[x] + X[i][j] * vector_x[x] + Y[i][j] * vector_y[x]
