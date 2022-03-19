@@ -106,7 +106,7 @@ def build_mesh(
 
     for i in range(grid_length):
         if verbose:
-            logging.info("line {} out of {}".format(i, grid_length))
+            print("line {} out of {}".format(i, grid_length))
 
         for j in range(grid_length):
             solution = [
